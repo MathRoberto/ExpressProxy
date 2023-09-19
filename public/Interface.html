@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Adicionar Produtos</title>
+</head>
+<body>
+  <h2>Adicionar Produtos</h2>
+
+  <label for="dealId">Deal ID:</label>
+  <input type="text" id="dealId"><br><br>
+
+  <div id="productDetails">
+    <h3>Detalhes do Produto</h3>
+    <button onclick="addProduct()">Adicionar Produto</button><br><br>
+  </div>
+
+  <button onclick="sendData()">OK</button>
+
+  <script>
+    const productDetails = [];
+
+    function addProduct() {
+      const productDiv = document.createElement("div");
+      productDiv.innerHTML = `
+        <label for="productId">ID do Produto:</label>
+        <input type="text" class="productId"><br>
+        <label for="quantity">Quantidade:</label>
+        <input type="text" class="quantity"><br>
+        <label for="unitPrice">Preço Unitário:</label>
+        <input type="text" class="unitPrice"><br><br>
+      `;
+      document.getElementById("productDetails").appendChild(productDiv);
+    }
+
+    async function sendData() {
+  const dealId = document.getElementById("dealId").value;
+
+  const productInputs = document.getElementsByClassName("productId");
+  const quantityInputs = document.getElementsByClassName("quantity");
+  const unitPriceInputs = document.getElementsByClassName("unitPrice");
+
+  for (let i = 0; i < productInputs.length; i++) {
+    const productId = productInputs[i].value;
+    const quantity = quantityInputs[i].value;
+    const unitPrice = unitPriceInputs[i].value;
+
+    if (productId && quantity && unitPrice) {
+      productDetails.push({
+        id: productId,
+        quantity: quantity,
+        unit_price: unitPrice
+      });
+    }
+  }
+
+  const requestBody = {
+    dealId: dealId, // Inclua o Deal ID no JSON
+    products: productDetails
+  };
+
+  try {
+    console.log("JSON completo:", requestBody);
+  } catch (error) {
+    console.error("Ocorreu um erro ao enviar os dados:", error);
+  }
+}
+
+  </script>
+</body>
+</html>
