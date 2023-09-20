@@ -7,6 +7,7 @@ const CONFIG = {
 };
 
 export default async function callApiGetProdutos(req, res) {
+  console.log('teste')
   try {
     const response = await axios.get(`${URL}/api/cpq/products`, CONFIG);
     res.status(200).send(response.data);
