@@ -33,38 +33,34 @@
     }
 
     async function sendData() {
-  const dealId = document.getElementById("dealId").value;
+      const dealId = document.getElementById("dealId").value;
 
-  const productInputs = document.getElementsByClassName("productId");
-  const quantityInputs = document.getElementsByClassName("quantity");
-  const unitPriceInputs = document.getElementsByClassName("unitPrice");
+      const productInputs = document.getElementsByClassName("productId");
+      const quantityInputs = document.getElementsByClassName("quantity");
+      const unitPriceInputs = document.getElementsByClassName("unitPrice");
 
-  for (let i = 0; i < productInputs.length; i++) {
-    const productId = productInputs[i].value;
-    const quantity = quantityInputs[i].value;
-    const unitPrice = unitPriceInputs[i].value;
+      for (let i = 0; i < productInputs.length; i++) {
+        const productId = productInputs[i].value;
+        const quantity = quantityInputs[i].value;
+        const unitPrice = unitPriceInputs[i].value;
 
-    if (productId && quantity && unitPrice) {
-      productDetails.push({
-        id: productId,
-        quantity: quantity,
-        unit_price: unitPrice
-      });
+        if (productId && quantity && unitPrice) {
+          productDetails.push({
+            id: productId,
+            quantity: quantity,
+            unit_price: unitPrice
+          });
+        }
+      }
+
+      const requestData = {
+        dealId: dealId, // Inclua o Deal ID no JSON
+        products: productDetails
+      };
+
+      // Envie os dados para a janela pai (Excel Add-in)
+      Office.context.ui.messageParent(JSON.stringify(requestData));
     }
-  }
-
-  const requestBody = {
-    dealId: dealId, // Inclua o Deal ID no JSON
-    products: productDetails
-  };
-
-  try {
-    console.log(":", requestBody);
-  } catch (error) {
-    console.error("Ocorreu um erro ao enviar os dados:", error);
-  }
-}
-
   </script>
 </body>
 </html>
