@@ -8,12 +8,17 @@ const CONFIG = {
   },
 };
 
-export async function callApiUpdateDeal(requestBody) {
+export default async function callApiUpdateDeal(req, res) {
   try {
-    const response = await axios.put(`${BASE_URL}/api/deals/${requestBody.dealId}?include=products`, requestBody, CONFIG);
-    return response.data;
+    const dealId = req.params.id;
+    console.log(dealId);
+    const response = await axios.put(
+      `${BASE_URL}/api/deals/${dealId}?include=products`,
+      req.body,
+      CONFIG
+    );
+    return res.status(200).send(response.data);
   } catch (error) {
-    console.error(error);
-    throw new Error("Erro ao fazer a solicitação PUT.");
+    res.status(500).send(error.message);
   }
 }

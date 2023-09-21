@@ -10,13 +10,22 @@ const CONFIG = {
 
 export default async function callApiUpdateDeal(req, res) {
   try {
-    const dealId = req.params.id;
-    console.log(dealId);
-    const response = await axios.put(
-      `${BASE_URL}/api/deals/${dealId}?include=products`,
-      req.body,
-      CONFIG
-    );
+    const { dealId, products } = req.body; // Extrai o dealId e products do corpo da requisição
+
+    // Monta o JSON
+    const requestData = {
+      dealId,
+      products,
+    };
+
+    console.log(requestData);
+
+    // Monta a URL
+    const apiUrl = `${BASE_URL}/api/deals/${dealId}?include=products`;
+
+    // Faz a requisição pra API do Sales
+    const response = await axios.put(apiUrl, requestData, CONFIG);
+
     return res.status(200).send(response.data);
   } catch (error) {
     res.status(500).send(error.message);

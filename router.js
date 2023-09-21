@@ -10,6 +10,6 @@ const router = Router();
 router.get("/produtos", callApiGetProdutos);
 router.get("/check", checkForLifesigns);
 router.get("/negocios", callApiGetDeals);
-router.put("/adicionarproduto/:id", callApiUpdateDeal);
+router.put("/adicionarproduto", callApiUpdateDeal);
 
 export default router;
