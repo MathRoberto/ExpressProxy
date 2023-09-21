@@ -57,10 +57,6 @@
         dealId: dealId, // Inclua o Deal ID no JSON
         products: productDetails
       };
-
-      // Envie os dados para a janela pai (Excel Add-in)
-      Office.context.ui.messageParent(JSON.stringify(requestData));
-    }
   </script>
 </body>
 </html>
