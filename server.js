@@ -22,7 +22,7 @@ app.get("/interface", (req, res) => {
   res.sendFile("Interface.html", { root: interfaceDirectory });
 });
 
-const port = 5000;
+const port = process.env.PORT || 5000; // Usará a porta definida no ambiente ou a porta 3000 por padrão
 app.listen(port, () => {
   console.log(`Server iniciado corretamente e hospedado na porta ${port}`);
 });
