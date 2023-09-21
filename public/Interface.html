@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Adicionar Produtos no Deal</title>
+  <title>Interface de Adição de Produtos</title>
 </head>
 <body>
-  <h2>Adicionar Produtos no Deal</h2>
+  <h2>Interface de Adição de Produtos</h2>
 
   <label for="dealId">Deal ID:</label>
   <input type="text" id="dealId"><br><br>
@@ -57,6 +57,10 @@
         dealId: dealId, // Inclua o Deal ID no JSON
         products: productDetails
       };
+
+      // Envie os dados para a janela pai (Excel Add-in)
+      Office.context.ui.messageParent(JSON.stringify(requestData));
+    }
   </script>
 </body>
 </html>
