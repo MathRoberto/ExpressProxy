@@ -14,7 +14,7 @@
     <button onclick="addProduct()">Adicionar Produto</button><br><br>
   </div>
 
-  <button id="botaook" onclick="sendData()">OK</button>
+  <button id="botaook" onclick="createJSON()">OK</button>
 
   <script>
     const productDetails = [];
@@ -32,7 +32,7 @@
       document.getElementById("productDetails").appendChild(productDiv);
     }
 
-    async function sendData() {
+    function createJSON() {
       const dealId = document.getElementById("dealId").value;
 
       const productInputs = document.getElementsByClassName("productId");
@@ -54,12 +54,13 @@
       }
 
       const requestData = {
-        dealId: dealId, // Inclua o Deal ID no JSON
+        dealId: dealId,
         products: productDetails
       };
 
-      // Envie os dados para a janela pai (Excel Add-in)
-      Office.context.ui.messageParent(JSON.stringify(requestData));
+      const jsonRequestData = JSON.stringify(requestData);
+
+      console.log(jsonRequestData);
     }
   </script>
 </body>
